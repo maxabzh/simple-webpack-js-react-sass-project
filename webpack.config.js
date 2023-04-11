@@ -12,7 +12,7 @@ const stylesHandler = isProduction
   : "style-loader";
 
 const config = {
-  entry: "./src/index.js",
+  entry: "./src/index.jsx",
   output: {
     path: path.resolve(__dirname, "dist"),
   },
@@ -30,6 +30,16 @@ const config = {
   ],
   module: {
     rules: [
+      {
+        test: /\.(js|jsx)$/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-react']
+          },
+        },
+        exclude: /node_modules/,
+      },
       {
         test: /\.css$/i,
         use: [stylesHandler, "css-loader"],
